@@ -25,7 +25,10 @@ defmodule Toprater.Mixfile do
   defp deps do
     [
       {:phoenix, "0.4.1"},
-      {:cowboy, "~> 1.0.0"}
+      {:cowboy, "~> 1.0.0"},
+      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
+      {:httpotion, "~> 0.2.0"},
+      {:jsex, "~> 2.0.0"}
     ]
   end
 end

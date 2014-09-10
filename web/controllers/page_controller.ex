@@ -1,15 +1,13 @@
 defmodule Toprater.PageController do
+
   use Phoenix.Controller
 
-  def index(conn, _params) do
-    render conn, "index"
+  def index(conn, %{"lang" => lang}) do
+    HTTPotion.start
+    {:ok, params} = JSEX.encode([lang: lang || "ru", subcriteria: true])
+    json = HTTPotion.get("http://5.9.141.34/api/v1/hotels/criteria?p=#{ params }").body
+    {:ok, criteria} = JSEX.decode json
+    render conn, "index", criteria: criteria["criteria"]
   end
 
-  def not_found(conn, _params) do
-    render conn, "not_found"
-  end
-
-  def error(conn, _params) do
-    render conn, "error"
-  end
 end

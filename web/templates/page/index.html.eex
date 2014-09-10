@@ -1,34 +1,26 @@
-<div class="jumbotron">
-  <h2>Welcome to Phoenix!</h2>
-  <p class="lead">Phoenix is an Elixir Web Framework targeting full-featured, fault tolerant applications with realtime functionality.</p>
-</div>
+<p>
+  <a href="/ru">RU</a>&nbsp;<a href="/en">EN</a>
+</p>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://api.phoenixframework.org/">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+<ul>
+  <%= for criterion <- @criteria do %>
+    <li>
+      <a class="criterion" href="javascript:;"><%= criterion["label"] %></a>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/issues?state=open">Issues</a>
-      </li>
-      <li>
-        <a href="irc://irc.freenode.net/elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/chris_mccord">@chris_mccord</a>
-      </li>
-    </ul>
-  </div>
-</div>
+      <ul style="display:none">
+        <%= for subcriterion <- criterion["subcriteria"] do %>
+          <li>
+            <%= subcriterion["label"] %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
 
+
+<script type="text/javascript">
+  $('.criterion').on('click', function() {
+    $(this).parent().find('ul').slideToggle(150)
+  })
+</script>
