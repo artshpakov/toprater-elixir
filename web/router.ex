@@ -1,7 +1,9 @@
 defmodule Toprater.Router do
   use Phoenix.Router
 
-  get "/", Toprater.PageController, :index, as: :pages
-  get "/:lang", Toprater.PageController, :index, as: :pages
+  scope alias: Toprater do
+    get "/", PageController, :index
+    get "/:lang", PageController, :index
+  end
 
 end
