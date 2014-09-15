@@ -3,7 +3,7 @@
 </p>
 
 <ul>
-  <%= for criterion <- @criteria do %>
+  <%= for criterion <- @tree do %>
     <li>
       <a class="criterion" href="javascript:;"><%= criterion["label"] %></a>
 
@@ -20,6 +20,8 @@
 
 
 <script type="text/javascript">
+  var criteria  = <%= safe JSEX.encode! criteria_list %>
+
   $('.criterion').on('click', function() {
     $(this).parent().find('ul').slideToggle(150)
   })
