@@ -2,21 +2,30 @@
   <a href="/ru">RU</a>&nbsp;<a href="/en">EN</a>
 </p>
 
-<ul role="criteria-tree">
-  <%= for criterion <- @tree do %>
-    <li>
-      <a class="criterion" v-on="click: expand('<%= criterion["name"] %>')" href="javascript:;"><%= criterion["label"] %></a>
+<div>
+  <div role="cart">
+    <div class="criterion" v-repeat="criterion: rating_criteria">
+      {{ criterion.label }}
+      <a href="javascript:;" v-on="click: drop(criterion)">&times;</a>
+    </div>
+  </div>
 
-      <ul v-show="expanded == '<%= criterion["name"] %>'">
-        <%= for subcriterion <- criterion["subcriteria"] do %>
-          <li>
-            <%= subcriterion["label"] %>
-          </li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+  <ul role="criteria-tree">
+    <%= for criterion <- @tree do %>
+      <li>
+        <a class="criterion" v-on="click: expand('<%= criterion["name"] %>')" href="javascript:;"><%= criterion["label"] %></a>
+
+        <ul v-show="expanded == '<%= criterion["name"] %>'">
+          <%= for subcriterion <- criterion["subcriteria"] do %>
+            <li>
+              <a href="javscript:;" v-on="click: pick('<%= subcriterion["name"] %>')"><%= subcriterion["label"] %></a>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 
 <script type="text/javascript">
