@@ -2,12 +2,12 @@
   <a href="/ru">RU</a>&nbsp;<a href="/en">EN</a>
 </p>
 
-<ul>
+<ul role="criteria-tree">
   <%= for criterion <- @tree do %>
     <li>
-      <a class="criterion" href="javascript:;"><%= criterion["label"] %></a>
+      <a class="criterion" v-on="click: expand('<%= criterion["name"] %>')" href="javascript:;"><%= criterion["label"] %></a>
 
-      <ul style="display:none">
+      <ul v-show="expanded == '<%= criterion["name"] %>'">
         <%= for subcriterion <- criterion["subcriteria"] do %>
           <li>
             <%= subcriterion["label"] %>
@@ -20,9 +20,5 @@
 
 
 <script type="text/javascript">
-  var criteria  = <%= safe JSEX.encode! criteria_list %>
-
-  $('.criterion').on('click', function() {
-    $(this).parent().find('ul').slideToggle(150)
-  })
+  var criteria = <%= safe JSEX.encode! criteria_list %>
 </script>
